@@ -10,7 +10,7 @@ env:
   global:
     - IMAGE=carlosedp/monitoring-grafana
     - QEMU_VERSION=v2.9.1-1
-    - VERSION=5.0.0
+    - VERSION=v5.0.0
   matrix:
     # TARGET = Base image architecture to be used
     # ARCH = qemu binary to be downloaded from https://github.com/multiarch/qemu-user-static/releases
