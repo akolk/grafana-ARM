@@ -19,11 +19,9 @@ env:
     - TARGET=arm64v8 ARCH=aarch64 TAG=arm64
     # - TARGET=arm32v6 ARCH=arm TAG=arm
 
-before_script:
+script:
   - docker pull debian:jessie
   - ci/createImage.py
-
-script:
   - docker run --name build-"$TAG" fg2it/grafana-builder ./build.sh ${VERSION:+-r} "$TAG"
   - mkdir "$TAG"
   - docker cp build-"$TAG":/tmp/graf-build/src/github.com/grafana/grafana/dist/ "$TAG"
