@@ -5,7 +5,7 @@ import sys
 
 d={}
 
-name = os.getenv("TRAVIS_TAG")
+name = os.getenv("VERSION")
 # expect tag(-component)?
 #    or commit((-branch)?-component)?
 # consider we have the second if commit match [0-9a-f]{6}
