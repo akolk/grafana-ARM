@@ -13,7 +13,7 @@ ENV TAG=$tag
 # Trick docker build in case qemu binary is not in dir.
 COPY .blank tmp/qemu-$ARCH-static* /usr/bin/
 
-ADD $TAG/grafana-$GRAFANA_VERSION.tar.gz /tmp/
+ADD $TAG/grafana.tar.gz /tmp/
 
 RUN apt-get update && apt-get install -qq -y wget tar sqlite && \
     mv /tmp/grafana-$GRAFANA_VERSION /grafana

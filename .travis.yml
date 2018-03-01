@@ -14,7 +14,7 @@ env:
     # TAG = Tag to be applied to the image when upload to DockerHub
     # - TARGET=amd64 ARCH=amd64 TAG=amd64
     - TARGET=arm64v8 ARCH=aarch64 TAG=arm64
-    - TARGET=arm32v6 ARCH=arm TAG=armv7
+    - TARGET=arm32v7 ARCH=arm TAG=armv7
 
 before_install:
   - sudo apt-get -qq update

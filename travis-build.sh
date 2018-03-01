@@ -5,6 +5,8 @@ docker run --name build-"$TAG" fg2it/grafana-builder ./build.sh ${VERSION:+-r} "
 
 mkdir "$TAG"
 docker cp build-"$TAG":/tmp/graf-build/src/github.com/grafana/grafana/dist/ "$TAG"
+export TARBALL=`ls "$TAG"/grafana*.tar.gz`
+mv "$TAG"/$TARBALL "$TAG"/grafana.tar.gz
 
 # Prepare qemu
 docker run --rm --privileged multiarch/qemu-user-static:register --reset
