@@ -21,15 +21,16 @@ before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y python3-minimal
 
-before_script:
-  - docker pull debian:jessie
-  - python3 ci/createImage.py
-  - echo "Image created"
-  - docker run --name build-"$TAG" fg2it/grafana-builder ./build.sh ${VERSION:+-r} "$TAG"
-  - mkdir "$TAG"
-  - docker cp build-"$TAG":/tmp/graf-build/src/github.com/grafana/grafana/dist/ "$TAG"
-
 script:
+  - >
+    docker pull debian:jessie
+    python3 ci/createImage.py
+    echo "Image created"
+    docker run --name build-$TAG fg2it/grafana-builder ./build.sh ${VERSION:+-r} $TAG
+    mkdir "$TAG"
+    docker cp build-"$TAG":/tmp/graf-build/src/github.com/grafana/grafana/dist/ "$TAG"
+
+after_success:
   - ./travis-build.sh
   - >
     if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then
