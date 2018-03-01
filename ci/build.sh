@@ -86,7 +86,7 @@ case "$ARM" in
     PHJSV="v2.1.1-wheezy-jessie-armv6"
     armv6_install_cross
     ;;
-  armv7)
+  armv7|arm|arm32)
     PHJSV="v2.1.1-wheezy-jessie"
     armv7_install_cross
     ;;
