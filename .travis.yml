@@ -2,7 +2,6 @@ sudo: required
 language: bash
 services:
   - docker
-install: true
 
 env:
   global:
@@ -15,7 +14,7 @@ env:
     # TAG = Tag to be applied to the image when upload to DockerHub
     # - TARGET=amd64 ARCH=amd64 TAG=amd64
     - TARGET=arm64v8 ARCH=aarch64 TAG=arm64
-    # - TARGET=arm32v6 ARCH=arm TAG=arm
+    - TARGET=arm32v6 ARCH=arm TAG=arm
 
 before_install:
   - sudo apt-get -qq update
@@ -26,7 +25,7 @@ before_script:
   - python3 ci/createImage.py
   - echo "Image created"
 
-after_success:
+script:
   - ./travis-build.sh
   - >
     if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then
