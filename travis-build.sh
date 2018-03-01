@@ -25,7 +25,7 @@ fi
 popd
 
 # Build image
-docker build --build-arg grafana_version=$(VERSION) --build-arg target=$TARGET --build-arg arch=$ARCH --build-arg tag=$TAG -t "$IMAGE":"VERSION"-"$TAG" .
+docker build --build-arg grafana_version=$(VERSION) --build-arg target=$TARGET --build-arg arch=$ARCH --build-arg tag=$TAG -t "$IMAGE":"$VERSION"-"$TAG" .
 
 # Test image
 docker run --rm "$IMAGE":"VERSION"-"$TAG" uname -a
