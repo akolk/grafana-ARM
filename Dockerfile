@@ -3,8 +3,12 @@ FROM $target/debian:9.3-slim
 
 ARG arch=aarch64
 ENV ARCH=$arch
-ARG GRAFANA_VERSION
-ARG TAG
+
+ARG grafana_version
+ENV GRAFANA_VERSION=$grafana_version
+
+ARG tag
+ENV TAG=$tag
 
 # Trick docker build in case qemu binary is not in dir.
 COPY .blank tmp/qemu-$ARCH-static* /usr/bin/
