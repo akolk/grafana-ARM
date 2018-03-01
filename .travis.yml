@@ -1,5 +1,5 @@
-language: bash
 sudo: required
+language: bash
 services:
   - docker
 install: true
@@ -21,16 +21,12 @@ before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y python3-minimal
 
-script:
-  - >
-    docker pull debian:jessie
-    python3 ci/createImage.py
-    echo "Image created"
-    docker run --name build-$TAG fg2it/grafana-builder ./build.sh ${VERSION:+-r} $TAG
-    mkdir "$TAG"
-    docker cp build-"$TAG":/tmp/graf-build/src/github.com/grafana/grafana/dist/ "$TAG"
+before_script:
+  - docker pull debian:jessie
+  - python3 ci/createImage.py
+  - echo "Image created"
 
-after_success:
+script:
   - ./travis-build.sh
   - >
     if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then
