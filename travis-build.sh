@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-docker run --name build-"$TAG" fg2it/grafana-builder ./build.sh ${VERSION:+-r} "$TAG"
+docker run --name build-"$TAG" fg2it/grafana-builder ./build.sh -r "$TAG"
 
 mkdir "$TAG"
 docker cp build-"$TAG":/tmp/graf-build/src/github.com/grafana/grafana/dist/ "$TAG"
