@@ -47,8 +47,8 @@ jobs:
         - echo "Pushing manifest "$IMAGE":latest"
         - >
           ./manifest-tool push from-args \
-              --platforms linux/armv7 linux/arm64 \
-              --template "$IMAGE:"$VERSION"-ARCH" \
+              --platforms linux/arm,linux/arm64 \
+              --template "$IMAGE:$VERSION-ARCH" \
               --target "$IMAGE:latest"
       env:
         # Overwrite env to avoid running stage for entire
