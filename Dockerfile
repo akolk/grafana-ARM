@@ -18,7 +18,7 @@ ADD $TAG/grafana.tar.gz /tmp/
 RUN ls -l /tmp/
 
 RUN apt-get update && apt-get install -qq -y wget tar sqlite && \
-    mv /tmp/grafana-`echo $VERSION|sed s/v//` /grafana
+    mv /tmp/grafana-`echo $GRAFANA_VERSION|sed s/v//` /grafana
 
 ADD config.ini /grafana/conf/config.ini
 
