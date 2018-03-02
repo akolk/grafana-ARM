@@ -1,4 +1,4 @@
-    #!/bin/bash
+#!/bin/bash
 set -e
 
 docker run --name build-"$TAG" fg2it/grafana-builder ./build.sh -r "$TAG"

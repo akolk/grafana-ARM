@@ -49,7 +49,7 @@ jobs:
           ./manifest-tool push from-args \
               --platforms linux/arm,linux/arm64 \
               --template "$IMAGE:$VERSION-ARCH" \
-              --target
+              --target "$IMAGE:latest"
          - >
           ./manifest-tool push from-args \
               --platforms linux/arm,linux/arm64 \
