@@ -49,7 +49,12 @@ jobs:
           ./manifest-tool push from-args \
               --platforms linux/arm,linux/arm64 \
               --template "$IMAGE:$VERSION-ARCH" \
-              --target "$IMAGE:latest"
+              --target
+         - >
+          ./manifest-tool push from-args \
+              --platforms linux/arm,linux/arm64 \
+              --template "$IMAGE:$VERSION-ARCH" \
+              --target "$IMAGE:$VERSION"
       env:
         # Overwrite env to avoid running stage for entire
         TARGET=none ARCH=none TAG=none
