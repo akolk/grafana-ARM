@@ -37,6 +37,10 @@ script:
 jobs:
   include:
     - stage: deploy
+      before_install:
+        - echo "No before_install"
+      before_script:
+        - echo "No before_script"
       script:
         - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
         - echo "Downloading manifest-tool"
