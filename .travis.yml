@@ -7,7 +7,6 @@ env:
   global:
     - IMAGE=carlosedp/monitoring-grafana
     - QEMU_VERSION=v2.9.1-1
-    - VERSION=v5.0.0
   matrix:
     # TARGET = Base image architecture to be used
     # ARCH = qemu binary to be downloaded from https://github.com/multiarch/qemu-user-static/releases
@@ -22,6 +21,7 @@ before_install:
 
 before_script:
   - docker pull debian:jessie
+  - VERSION=$(curl -s https://api.github.com/repos/grafana/grafana/releases/latest | grep "tag_name" | cut -d\" -f4)
   - python3 ci/createImage.py
   - echo "Image created"
 
@@ -42,6 +42,7 @@ jobs:
       before_script:
         - echo "No before_script"
       script:
+        - VERSION=$(curl -s https://api.github.com/repos/grafana/grafana/releases/latest | grep "tag_name" | cut -d\" -f4)
         - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
         - echo "Downloading manifest-tool"
         - wget https://github.com/estesp/manifest-tool/releases/download/v0.7.0/manifest-tool-linux-amd64
