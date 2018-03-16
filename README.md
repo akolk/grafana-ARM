@@ -9,6 +9,8 @@
 
 Grafana doesn't provide Docker images for ARM, so the purpose of this repo is to build them and upload to Dockerhub on [https://hub.docker.com/r/carlosedp/monitoring-grafana/](https://hub.docker.com/r/carlosedp/monitoring-grafana/).
 
+Latest release: [**5.0.3**](https://github.com/grafana/grafana/releases/tag/v5.0.3)
+
 ## `ci/`
 Notes and tools to crossbuild Grafana. Used to build on [travis](https://travis-ci.org/).
 
