@@ -7,6 +7,7 @@ env:
   global:
     - IMAGE=carlosedp/monitoring-grafana
     - QEMU_VERSION=v2.9.1-1
+    - VER=`curl -s https://api.github.com/repos/grafana/grafana/releases/latest | grep "tag_name" | cut -d\" -f4`
   matrix:
     # TARGET = Base image architecture to be used
     # ARCH = qemu binary to be downloaded from https://github.com/multiarch/qemu-user-static/releases
@@ -20,8 +21,9 @@ before_install:
   - sudo apt-get install -y python3-minimal
 
 before_script:
-  - export VERSION=$(curl -s https://api.github.com/repos/grafana/grafana/releases/latest | grep "tag_name" | cut -d\" -f4)
-  - echo "Build Grafana version ${VERSION}"
+  - export VERSION=`curl -s https://api.github.com/repos/grafana/grafana/releases/latest | grep "tag_name" | cut -d\" -f4`
+  - echo "Build Grafana version $VERSION"
+  - echo "Test global variable: $VER"
   - docker pull debian:jessie
   - python3 ci/createImage.py
   - echo "Image created"
