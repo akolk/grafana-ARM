@@ -20,7 +20,7 @@ before_install:
   - sudo apt-get install -y python3-minimal
 
 before_script:
-  - 'VERSION=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/grafana/grafana/releases/latest | jq -r ".tag_name)'
+  - 'VERSION=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/grafana/grafana/releases/latest | jq -r ".tag_name")'
   - echo "Build Grafana version $VERSION"
   - docker pull debian:jessie
   - python3 ci/createImage.py
@@ -43,7 +43,7 @@ jobs:
       before_script:
         - echo "No before_script"
       script:
-        - 'VERSION=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/grafana/grafana/releases/latest | jq -r ".tag_name)'
+        - 'VERSION=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/grafana/grafana/releases/latest | jq -r ".tag_name")'
         - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
         - echo "Downloading manifest-tool"
         - wget https://github.com/estesp/manifest-tool/releases/download/v0.7.0/manifest-tool-linux-amd64
