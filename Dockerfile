@@ -18,7 +18,7 @@ COPY .blank tmp/qemu-$ARCH-static* /usr/bin/
 
 RUN apt-get update && apt-get install -qq -y wget tar sqlite && \
     wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_${GRAFANA_VERSION}_${GRAFANA_ARCH}.deb -O /tmp/grafana_${GRAFANA_VERSION}_${GRAFANA_ARCH}.deb && \
-    apt install /tmp/grafana_${GRAFANA_VERSION}_${GRAFANA_ARCH}.deb && \
+    apt install -y /tmp/grafana_${GRAFANA_VERSION}_${GRAFANA_ARCH}.deb && \
     rm /tmp/grafana_${GRAFANA_VERSION}_${GRAFANA_ARCH}.deb
 
 ADD config.ini /grafana/conf/config.ini
