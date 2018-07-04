@@ -18,7 +18,7 @@ fi
 popd
 
 # Build image
-VER=echo $VERSION |sed s/^v//g
+VER=`echo $VERSION |sed s/^v//g`
 docker build --build-arg grafana_version="$VER" --build-arg target=$TARGET --build-arg arch=$ARCH --build-arg tag=$TAG --build-arg grafana_arch="$GRAFANA_ARCH" -t "$IMAGE":"$VERSION"-"$TAG" .
 
 # Test image
