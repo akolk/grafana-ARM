@@ -7,18 +7,18 @@ ENV ARCH=$arch
 ARG grafana_version
 ENV GRAFANA_VERSION=$grafana_version
 
+ARG grafana_arch=arm64
+ENV GRAFANA_ARCH=$grafana_arch
+
 ARG tag
 ENV TAG=$tag
 
 # Trick docker build in case qemu binary is not in dir.
 COPY .blank tmp/qemu-$ARCH-static* /usr/bin/
 
-ADD $TAG/grafana.tar.gz /tmp/
-
-RUN ls -l /tmp/
-
 RUN apt-get update && apt-get install -qq -y wget tar sqlite && \
-    mv /tmp/grafana-`echo $GRAFANA_VERSION|sed s/v//` /grafana
+    wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_${GRAFANA_VERSION}_${GRAFANA_ARCH}.deb && \
+    dpkg -i grafana_${GRAFANA_VERSION}_${GRAFANA_ARCH}.deb
 
 ADD config.ini /grafana/conf/config.ini
 

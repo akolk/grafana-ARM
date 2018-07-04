@@ -12,21 +12,12 @@ env:
     # ARCH = qemu binary to be downloaded from https://github.com/multiarch/qemu-user-static/releases
     # TAG = Tag to be applied to the image when upload to DockerHub
     # - TARGET=amd64 ARCH=amd64 TAG=amd64
-    - TARGET=arm64v8 ARCH=aarch64 TAG=arm64
-    - TARGET=arm32v7 ARCH=arm TAG=arm
-
-before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y python3-minimal
-
-before_script:
-  - 'export VERSION=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/grafana/grafana/releases/latest | jq -r ".tag_name")'
-  - echo "Build Grafana version $VERSION"
-  - docker pull debian:jessie
-  - python3 ci/createImage.py
-  - echo "Image created"
+    - TARGET=arm64v8 ARCH=aarch64 TAG=arm64 GRAFANA_ARCH=arm64
+    - TARGET=arm32v7 ARCH=arm TAG=arm GRAFANA_ARCH=armhf
 
 script:
+  - 'export VERSION=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/grafana/grafana/releases/latest | jq -r ".tag_name")'
+  - echo "Build image for Grafana version $VERSION"
   - ./travis-build.sh
   - >
     if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then
@@ -55,4 +46,4 @@ jobs:
         - ./manifest-tool push from-args --platforms linux/arm,linux/arm64 --template "$IMAGE:$VERSION-ARCH" --target "$IMAGE:$VERSION"
       env:
         # Overwrite env to avoid running stage for entire
-        TARGET=none ARCH=none TAG=none
+        TARGET=none ARCH=none TAG=none GRAFANA_ARCH=none

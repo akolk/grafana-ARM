@@ -5,14 +5,13 @@
 [image-svg]: https://images.microbadger.com/badges/image/carlosedp/monitoring-grafana.svg
 [image-url]: https://hub.docker.com/r/carlosedp/monitoring-grafana
 
-[Grafana](http://grafana.org) *unofficial* packages for ARM32 and ARM64 platforms.
+[Grafana](http://grafana.org) *unofficial* Docker images for ARM32 and ARM64 platforms.
 
 Grafana doesn't provide Docker images for ARM, so the purpose of this repo is to build them and upload to Dockerhub on [https://hub.docker.com/r/carlosedp/monitoring-grafana/](https://hub.docker.com/r/carlosedp/monitoring-grafana/).
 
-Latest release: [**5.0.4**](https://github.com/grafana/grafana/releases/tag/v5.0.4)
+The build uses official installer packages from [https://grafana.com/grafana/download](https://grafana.com/grafana/download).
 
-## `ci/`
-Notes and tools to crossbuild Grafana. Used to build on [travis](https://travis-ci.org/).
+Latest release: [**5.2.1**](https://github.com/grafana/grafana/releases/tag/v5.2.1)
 
 ---
 
