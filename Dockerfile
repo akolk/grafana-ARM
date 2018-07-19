@@ -23,9 +23,11 @@ RUN apt-get update && apt-get install -qq -y wget tar sqlite && \
 
 ADD config.ini /grafana/conf/config.ini
 
-USER       nobody
+RUN        mkdir /data && chmod 777 /data
+
+USER       grafana
 EXPOSE     3000
 VOLUME     [ "/data" ]
-WORKDIR    /grafana
-ENTRYPOINT [ "/grafana/bin/grafana-server" ]
+WORKDIR    /usr/share/grafana/
+ENTRYPOINT [ "/usr/sbin/grafana-server" ]
 CMD        [ "-config=/grafana/conf/config.ini" ]
