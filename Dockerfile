@@ -17,18 +17,18 @@ ENV TAG=$tag
 COPY .blank tmp/qemu-$ARCH-static* /usr/bin/
 
 RUN apt-get update && apt-get install -qq -y wget tar sqlite && \
-    wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_${GRAFANA_VERSION}_${GRAFANA_ARCH}.deb -O /tmp/grafana_${GRAFANA_VERSION}_${GRAFANA_ARCH}.deb && \
-    apt install -y /tmp/grafana_${GRAFANA_VERSION}_${GRAFANA_ARCH}.deb && \
-    rm /tmp/grafana_${GRAFANA_VERSION}_${GRAFANA_ARCH}.deb
+    wget -O /tmp/grafana.tar.gz https://dl.grafana.com/oss/release/grafana-${GRAFANA_VERSION}.linux-${GRAFANA_ARCH}.tar.gz && \
+    tar -zxvf /tmp/grafana.tar.gz -C /tmp && mv /tmp/grafana-$GRAFANA_VERSION /grafana && \
+    rm -rf /tmp/grafana.tar.gz
 
 ADD config.ini /grafana/conf/config.ini
 
 RUN        mkdir /data && chmod 777 /data
 
-USER       grafana
+USER       nobody
 EXPOSE     3000
 VOLUME     [ "/data" ]
-WORKDIR    /usr/share/grafana/
+WORKDIR    /grafana/
 
 ENTRYPOINT [ "/usr/sbin/grafana-server" ]
 
