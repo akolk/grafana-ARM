@@ -30,6 +30,6 @@ EXPOSE     3000
 VOLUME     [ "/data" ]
 WORKDIR    /grafana/
 
-ENTRYPOINT [ "/usr/sbin/grafana-server" ]
+ENTRYPOINT [ "/grafana/bin/grafana-server" ]
 
 CMD        [ "-config=/grafana/conf/config.ini" ]
