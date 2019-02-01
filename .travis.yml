@@ -16,8 +16,8 @@ env:
     - TARGET=arm32v7 ARCH=arm TAG=arm GRAFANA_ARCH=armv7
 
 script:
-  # - 'export VERSION=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/grafana/grafana/releases/latest | jq -r ".tag_name")'
-  - 'export VERSION=$(curl -s  https://api.github.com/repos/grafana/grafana/releases/latest | jq -r ".tag_name")'
+  - 'export VERSION=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/grafana/grafana/releases/latest | jq -r ".tag_name")'
+  #- 'export VERSION=$(curl -s  https://api.github.com/repos/grafana/grafana/releases/latest | jq -r ".tag_name")'
   - echo "Build image for Grafana version $VERSION"
   - ./travis-build.sh
   - >
